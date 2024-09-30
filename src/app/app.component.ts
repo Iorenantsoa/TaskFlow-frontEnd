@@ -11,4 +11,9 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'TaskFlowFrontEnd';
+  show  : boolean = false;
+  lists : number[] = [1,2,3,4]
+
+
+
 }
