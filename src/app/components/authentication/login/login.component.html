@@ -1,0 +1,44 @@
+<div class=" w-full h-full flex justify-center items-center">
+    <div class="w-full md:w-[400px] bg-gray-900">
+        <div class="flex justify-center items-center gap-x-3">
+            <svg class="w-10 h-10" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8 3V0H6V3H8Z" fill="#FFF" />
+                <path d="M0.792893 2.20711L3.29289 4.70711L4.70711 3.29289L2.20711 0.792893L0.792893 2.20711Z"
+                    fill="#FFF" />
+                <path
+                    d="M6 5L5 6.00001L8 15H10L10.7172 12.1314L14.2929 15.7071L15.7071 14.2929L12.1314 10.7172L15 10V8L6 5Z"
+                    fill="#FFF" />
+                <path d="M0 6H3V8H0V6Z" fill="#FFF" />
+            </svg>
+            <h1 class="text-4xl font-semibold text-center">Connectez-vous</h1>
+        </div>
+
+
+        <form class="my-5" #loginForm="ngForm" (ngSubmit)="userLogin(loginForm)">
+            <div class="my-3">
+                <label for="username" class="block mb-2 text-lg font-medium   text-white">Nom
+                    d'utilisateur</label>
+                <input required type="username" name="username" id="username" [(ngModel)]="username"
+                    class=" rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2 bg-gray-700  outline-none  placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="username ou email" required="">
+            </div>
+            <div class="my-3">
+                <label for="password" class="block mb-2 text-lg font-medium  text-white">Password</label>
+                <input required type="password" name="password" id="password" [(ngModel)]="password"
+                    class=" rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2 bg-gray-700   outline-none  placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="password" required="">
+            </div>
+            <div class="mt-5 mb-2">
+                <button
+                    [disabled]="loginForm.invalid"
+                    class="w-full text-slate-100 bg-blue-600 hover:bg-opacity-80 outline-none text-lg p-2 rounded-lg focus:ring-blue-500 font-medium ">Se
+                    connecter</button>
+            </div>
+            <div class="">
+                <p class="text-sm font-normal text-right text-gray-300">Vous n'avez pas encore un compte?<a
+                        [routerLink]="['/registration']" routerLinkActive="router-link-active"
+                        class="cursor-pointer text-blue-600 font-medium "> S'inscrire</a></p>
+            </div>
+        </form>
+    </div>
+</div>

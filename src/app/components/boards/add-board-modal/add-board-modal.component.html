@@ -1,0 +1,24 @@
+<!-- Modal backdrop -->
+<div *ngIf="isOpen" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50" id="my-modal">
+  
+    <!-- Modal container -->
+    <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white" (click)="onCloseModal()">
+      
+      <!-- Modal header -->
+      <div class="text-center mb-4">
+        <h3 class="text-lg font-semibold text-gray-900">Modal Title</h3>
+      </div> 
+      
+      <!-- Modal body -->
+      <div class="mb-6">
+        <p class="text-gray-600">This is the content of the modal. You can add anything here.</p>
+      </div>
+      
+      <!-- Modal footer -->
+      <div class="flex justify-end">
+        <button class="px-4 py-2 bg-red-600 text-white rounded mr-2" (click)="onCloseModal()">Close</button>
+        <button class="px-4 py-2 bg-blue-600 text-white rounded">Save</button>
+      </div>
+    </div>
+  </div>
+  
