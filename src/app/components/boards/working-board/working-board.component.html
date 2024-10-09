@@ -126,44 +126,47 @@
 
                         <div>
 
-
-                            <div class="hidden">
-                                <p class="text-gray-400 ">Ajouter une carte</p>
+                            <div *ngIf="activeFormId !== list._id">
+                                <div (click)="showForm(list._id)"
+                                    class="cursor-pointer flex justify-start items-center gap-x-2">
+                                    <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                            d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22ZM12.75 9C12.75 8.58579 12.4142 8.25 12 8.25C11.5858 8.25 11.25 8.58579 11.25 9L11.25 11.25H9C8.58579 11.25 8.25 11.5858 8.25 12C8.25 12.4142 8.58579 12.75 9 12.75H11.25V15C11.25 15.4142 11.5858 15.75 12 15.75C12.4142 15.75 12.75 15.4142 12.75 15L12.75 12.75H15C15.4142 12.75 15.75 12.4142 15.75 12C15.75 11.5858 15.4142 11.25 15 11.25H12.75V9Z"
+                                            fill="#c0c5c0" />
+                                    </svg>
+                                    <p class="text-gray-400 ">Ajouter une carte</p>
+                                </div>
                             </div>
 
-                            <form #addCardForm="ngForm" (ngSubmit)="onAddCard(addCardForm , list._id )">
+                            <form *ngIf="activeFormId === list._id" #addCardForm="ngForm"
+                                (ngSubmit)="onAddCard(addCardForm, list._id)">
                                 <textarea required
-                                    class="py-2 px-4 text-sm bg-gray-900 outline-none w-full mt-3 rounded-md text-slate-50"
-                                    type="text" id="card" name="card" placeholder="Saisissez un titre pour cette carte"
+                                    class="py-1 px-4 text-sm bg-gray-900 outline-none w-full mt-3 rounded-md text-slate-50"
+                                    id="card" name="card" placeholder="Saisissez un titre pour cette carte"
                                     ngModel></textarea>
-                                <button
-                                    class="py-2 px-4 bg-green-700 text-slate-50 text-sm mt-3 rounded-md font-semibold hover:bg-opacity-80 transition-all duration-500 z-10"
-                                    type="submit">Ajouter une carte</button>
+                                <div class="flex justify-start gap-x-3 items-center mt-3">
+
+                                    <button class="py-2 px-6 bg-green-700 hover:bg-opacity-80 duration-500 text-slate-50 text-sm  rounded-md font-semibold" 
+                                        type="submit">Ajouter une carte
+                                    </button>
+                                    <div class="rounded-md  hover:bg-opacity-80 cursor-pointer p-1"
+                                        (click)="hideForm()">
+                                        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                d="M19.207 6.207a1 1 0 0 0-1.414-1.414L12 10.586 6.207 4.793a1 1 0 0 0-1.414 1.414L10.586 12l-5.793 5.793a1 1 0 1 0 1.414 1.414L12 13.414l5.793 5.793a1 1 0 0 0 1.414-1.414L13.414 12l5.793-5.793z"
+                                                fill="#FFF" />
+                                        </svg>
+                                    </div>
+                                </div>
                             </form>
                         </div>
 
                     </div>
                 </div>
             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ 
 
             <!-- liste a afficher -->
             <div class="  gap-x-5 max-w-[100%] flex-wrap justify-center sm:justify-start gap-y-5  ">
@@ -172,16 +175,42 @@
                     class="relative   min-w-[250px]   max-w-[250px] flex-wrap p-3 rounded-lg shadow bg-gray-800 border-gray-700 cursor-pointer hover:bg-opacity-70 transition-all duration-500 z-10 ">
 
 
-                    <form #AddListForm="ngForm" (ngSubmit)="addList(AddListForm)">
-                        <input required
-                            class="py-2 px-4 text-sm bg-gray-900 outline-none w-full mt-3 rounded-md text-slate-50 "
-                            type="text" id="liste" name="title" placeholder="Saisissez le nom de la liste" ngModel />
-                        <div class="flex justify-end">
-                            <button
-                                class=" py-2 px-4 bg-blue-600 text-slate-50 text-sm mt-3 rounded-md font-semibold hover:bg-opacity-80 transition-all duration-500 z-10"
-                                type="submit">Ajouter une liste </button>
-                        </div>
-                    </form>
+                    <div (click)="showAddListForm()" *ngIf="!showFormAddList"
+                        class="cursor-pointer flex justify-start items-center gap-x-2">
+                        <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22ZM12.75 9C12.75 8.58579 12.4142 8.25 12 8.25C11.5858 8.25 11.25 8.58579 11.25 9L11.25 11.25H9C8.58579 11.25 8.25 11.5858 8.25 12C8.25 12.4142 8.58579 12.75 9 12.75H11.25V15C11.25 15.4142 11.5858 15.75 12 15.75C12.4142 15.75 12.75 15.4142 12.75 15L12.75 12.75H15C15.4142 12.75 15.75 12.4142 15.75 12C15.75 11.5858 15.4142 11.25 15 11.25H12.75V9Z"
+                                fill="rgb(191 219 254)" />
+                        </svg>
+                        <p class="text-blue-200 ">Ajouter une Liste</p>
+                    </div>
+
+
+
+                    <div *ngIf="showFormAddList">
+                        <form #AddListForm="ngForm" (ngSubmit)="addList(AddListForm)">
+                            <input required
+                                class="py-2 px-4 text-sm bg-gray-900 outline-none w-full rounded-md text-slate-50 "
+                                type="text" id="liste" name="title" placeholder="Saisissez le nom de la liste"
+                                ngModel />
+                            <div class="flex justify-start items-center mt-3">
+                                <button
+                                    class=" py-2 px-6 bg-blue-600  text-slate-50 text-sm rounded-md font-semibold hover:bg-opacity-80 transition-all duration-500 z-10"
+                                    type="submit">Ajouter une liste </button>
+
+
+                                <div class="rounded-md  hover:bg-opacity-80 cursor-pointer p-2"
+                                    (click)="hideAddListForm()">
+                                    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                            d="M19.207 6.207a1 1 0 0 0-1.414-1.414L12 10.586 6.207 4.793a1 1 0 0 0-1.414 1.414L10.586 12l-5.793 5.793a1 1 0 1 0 1.414 1.414L12 13.414l5.793 5.793a1 1 0 0 0 1.414-1.414L13.414 12l5.793-5.793z"
+                                            fill="#FFF" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

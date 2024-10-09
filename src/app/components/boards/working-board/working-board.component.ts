@@ -20,6 +20,8 @@ export class WorkingBoardComponent implements OnInit {
   listIdAddCard: string | null = null
   titleCard: string = ""
   showFormAddCard : boolean = false
+  activeFormId: string | null = null; 
+  showFormAddList : boolean = false
 
   constructor(
     private activeRoute: ActivatedRoute,
@@ -30,6 +32,29 @@ export class WorkingBoardComponent implements OnInit {
   ) { }
   ngOnInit(): void {
     this.WorkingBoardDetail()
+    
+  }
+
+
+  showAddListForm(){
+    this.showFormAddList = true 
+  }
+  
+  hideAddListForm(){ 
+    this.showFormAddList = false
+  }
+
+
+
+
+   // Fonction pour afficher le formulaire
+   showForm(listId: string) {
+    this.activeFormId = listId;
+  }
+
+  // Fonction pour cacher le formulaire
+  hideForm() {
+    this.activeFormId = null;
   }
 
   onShowPopUp(boardId: string): void {
@@ -111,6 +136,7 @@ export class WorkingBoardComponent implements OnInit {
       (response) => {
         if (response.success) {
           this.toast.success(response.message, "Success")
+          this.hideForm();
           window.location.reload()
         } else {
           this.toast.error(response.message, "Error")

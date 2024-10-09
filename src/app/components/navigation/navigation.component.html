@@ -30,7 +30,8 @@
             <p class="text-sm font-medium text-gray-300">{{user.email}} </p>
           </div>
           <ul class="py-1"> 
-            <li><a href="#" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-600">Settings</a></li>
+            <li><a href="#" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-600">Modifier le profil</a></li>
+            <li><a href="#" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-600">Changer le mot de passe</a></li>
             <li><a class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-600" (click)="onLogOut()"> Sign out</a>
             </li>
           </ul>
@@ -156,13 +157,9 @@
         </svg>
         Créer un tableau
       </button>
-
-
     </ul>
   </div>
 </aside>
-
-
 <div *ngIf="isOpen"
   class="fixed flex justify-center items-start inset-0 bg-gray-800 bg-opacity-80  overflow-y-auto h-full w-full z-50 transition-all duration-500 "
   id="my-modal">
