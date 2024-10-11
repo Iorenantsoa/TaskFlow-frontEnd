@@ -1,12 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, NgModule, OnInit } from '@angular/core';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router'; 
-import { FormsModule } from '@angular/forms'; 
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { AuthenticationService } from '../authentication/authentication.service';
 import { ToastrService } from 'ngx-toastr';
 import { BoardComponent } from '../boards/board/board.component';
 import { AddBoardModalComponent } from '../boards/add-board-modal/add-board-modal.component';
 import { BoardService } from '../boards/board.service';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -27,6 +28,9 @@ export class NavigationComponent implements OnInit {
   isModalOpen = false;
   isOpen = false;
   user: any
+  isModalChangePasswordIsOpen: boolean = false;
+  oldPassword: string = ""
+  newPassword: string = ""
 
 
   constructor(
@@ -74,7 +78,7 @@ export class NavigationComponent implements OnInit {
         if (response.success) {
 
           window.location.reload()
-          this.toastr.success(response.message, "Succes") 
+          this.toastr.success(response.message, "Succes")
 
         } else {
 
@@ -82,7 +86,7 @@ export class NavigationComponent implements OnInit {
         }
       },
       (error) => {
-        this.toastr.error(error.message, "Erreur") 
+        this.toastr.error(error.message, "Erreur")
       }
     )
     this.nameNewBoard = ""
@@ -110,6 +114,39 @@ export class NavigationComponent implements OnInit {
       }
 
     )
+  }
+
+  onShowModalChangePassword(): boolean {
+    this.isModalChangePasswordIsOpen = true
+    return this.isModalChangePasswordIsOpen
+  }
+
+  onHideModalChangePassowrd(): boolean {
+    this.isModalChangePasswordIsOpen = false
+    return this.isModalChangePasswordIsOpen
+  }
+
+  onChangePassword(changePasswordForm: any) {
+
+    const value = changePasswordForm.form.value
+
+    this.authenticationService.onChangePassword(value).subscribe(
+      (response) => {
+        if (response.success) {
+          this.toastr.success(response.message, "Success")
+          value.oldPassword = ""
+          value.newPassword = ""
+          this.onHideModalChangePassowrd()
+        } else {
+          this.toastr.error(response.message, 'Erreur')
+        }
+      },
+      (error) => {
+        this.toastr.error("Erreur", 'Erreur')
+      }
+    )
+
+
   }
 
 

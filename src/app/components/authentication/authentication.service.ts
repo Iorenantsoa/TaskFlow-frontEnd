@@ -7,6 +7,7 @@ import { LoginDto } from './dto/login.dto';
 import { Router } from '@angular/router';
 import { UserLoggedInDto } from './dto/user-logged-in.dto';
 import { ToastrService } from 'ngx-toastr';
+import { UserChangePass } from './dto/user-change-pass.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -44,5 +45,10 @@ export class AuthenticationService {
 
   getUserLoggedIn () : Observable<UserLoggedInDto> {
     return this.httpClient.get<UserLoggedInDto>("http://localhost:3000/user/getUserLoggedIn")
+  }
+
+  onChangePassword(password : UserChangePass) : Observable<any>{
+    
+    return this.httpClient.put('http://localhost:3000/user/editPassword' , password)
   }
 }
