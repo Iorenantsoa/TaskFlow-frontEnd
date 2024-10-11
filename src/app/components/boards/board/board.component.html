@@ -19,7 +19,7 @@
 
                 <!-- Afficher le popup seulement si l'ID du tableau correspond à activePopupId -->
                 <div *ngIf="activePopupId === board._id"
-                    class="absolute top-10 -right-3 border border-solid border-gray-800 bg-gray-900 rounded-md z-50 text-[rgb(156 163 175)] min-w-[150px] transition-all duration-500 ">
+                    class="absolute top-10 -right-3 border border-solid border-gray-800 bg-gray-900 rounded-md z-10 text-[rgb(156 163 175)] min-w-[150px] transition-all duration-500 ">
                     <ul>
                         <li class=" hover:bg-gray-700 w-full transition-all duration-500 rounded-t-md ">
                             <form #formulaire="ngForm" (ngSubmit)="updateBoard(board._id)">

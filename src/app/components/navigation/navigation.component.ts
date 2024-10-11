@@ -7,7 +7,6 @@ import { ToastrService } from 'ngx-toastr';
 import { BoardComponent } from '../boards/board/board.component';
 import { AddBoardModalComponent } from '../boards/add-board-modal/add-board-modal.component';
 import { BoardService } from '../boards/board.service';
-import { Observable } from 'rxjs';
 
 
 @Component({
@@ -29,8 +28,11 @@ export class NavigationComponent implements OnInit {
   isOpen = false;
   user: any
   isModalChangePasswordIsOpen: boolean = false;
+  isModalEditUserIsOpen: boolean = false;
   oldPassword: string = ""
   newPassword: string = ""
+  editUsername: string = ""
+  editEmail: string = ""
 
 
   constructor(
@@ -41,6 +43,7 @@ export class NavigationComponent implements OnInit {
   ) { }
   ngOnInit(): void {
     this.getUserLoggedIn()
+
   }
 
   onCloseModal() {
@@ -78,7 +81,7 @@ export class NavigationComponent implements OnInit {
         if (response.success) {
 
           window.location.reload()
-          this.toastr.success(response.message, "Succes")
+          this.toastr.success(response.message, "Success")
 
         } else {
 
@@ -107,7 +110,8 @@ export class NavigationComponent implements OnInit {
     this.authenticationService.getUserLoggedIn().subscribe(
       (response) => {
         this.user = response
-        // this.toastr.info("Utilisateur récupéré" , "Info")
+        this.editEmail = this.user.email
+        this.editUsername = this.user.username
       },
       (error) => {
         this.toastr.error(error)
@@ -146,6 +150,42 @@ export class NavigationComponent implements OnInit {
       }
     )
 
+  }
+
+  onShowModalEditUser(): boolean {
+    const isOpen = this.isModalEditUserIsOpen = true
+    this.editEmail = this.user.email
+    this.editUsername = this.user.username
+    return isOpen
+  }
+  onHideModalEditUser(): boolean {
+    const isOpen = this.isModalEditUserIsOpen = false
+    return isOpen
+  }
+
+  onEditUser(formulaire: any): any {
+    const value = formulaire.form.value
+
+    if(value.email =="" || value.username ==""){
+      this.toastr.warning('Tous les champs sont obligatoires' , "Warning")
+      return
+    }
+
+    this.authenticationService.onEditUser(value).subscribe(
+      (response) => {
+        if (response.success) {
+          this.toastr.success(response.message, "Success") 
+          this.onHideModalEditUser()
+          this.authenticationService.userLogOut()
+          this.toastr.info("Vous devez d'abord vous reconnecter")
+        } else {
+          this.toastr.error(response.message, 'Erreur')
+        }
+      },
+      (error) => {
+        this.toastr.error("Erreur", 'Erreur')
+      }
+    )
 
   }
 

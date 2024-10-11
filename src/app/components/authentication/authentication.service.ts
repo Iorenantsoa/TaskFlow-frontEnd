@@ -51,4 +51,8 @@ export class AuthenticationService {
     
     return this.httpClient.put('http://localhost:3000/user/editPassword' , password)
   }
+
+  onEditUser (newUser : UserLoggedInDto) : Observable<any>{
+    return this.httpClient.put('http://localhost:3000/user/editUser' , newUser)
+  }
 }

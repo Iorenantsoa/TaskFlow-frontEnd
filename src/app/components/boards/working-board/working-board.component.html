@@ -17,7 +17,7 @@
 
                         <div class="flex justify-between items-center border-b border-slate-50 mb-3 pb-3">
                             <h4 class="font-semibold">{{list.title}}</h4>
-                            <svg (click)="onShowPopUp(list._id )" fill="#FFF" class="w-5 h-5  z-50 cursor-pointer"
+                            <svg (click)="onShowPopUp(list._id )" fill="#FFF" class="w-5 h-5  z-10 cursor-pointer"
                                 viewBox="0 0 32 32" enable-background="new 0 0 32 32" id="Glyph" version="1.1"
                                 xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
                                 xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -32,7 +32,7 @@
 
                         <!-- Afficher le popup seulement si l'ID du tableau correspond à activePopupId -->
                         <div *ngIf="activePopupId === list._id"
-                            class="absolute  top-10 -right-3 border border-solid border-gray-800 bg-gray-900 rounded-md z-50 text-[rgb(156 163 175)] min-w-[150px] transition-all duration-500 ">
+                            class="absolute  top-10 -right-3 border border-solid border-gray-800 bg-gray-900 rounded-md z-10 text-[rgb(156 163 175)] min-w-[150px] transition-all duration-500 ">
                             <ul>
                                 <li class=" hover:bg-gray-700 w-full transition-all duration-500 rounded-t-md ">
                                     <form>
